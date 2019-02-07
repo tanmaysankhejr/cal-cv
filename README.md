@@ -1,7 +1,5 @@
 # cal-cv
 
----
-
 ## Dependencies
 
 `pip install numpy opencv-python`
