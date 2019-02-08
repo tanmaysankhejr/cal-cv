@@ -27,6 +27,8 @@ def framecount(cur):
 		elif cur == "C":
 			dis = "0"
 			return ""
+		elif not cur in "0123456789":
+			return str(" " + cur + " ")
 		return cur 
 	return ""
 
@@ -119,7 +121,7 @@ while True:
 	if(len(dis) > 10):
 		fontsize = 0.8
 		fontthickness = 3
-	cv2.putText(img2,str(dis),( (x_start - x_one + (x_one//3) + 70) ,(y_start -y_one + 25)), font, fontsize,(0,0,255),fontthickness,cv2.LINE_AA)
+	cv2.putText(img2,str("".join(dis.split())),( (x_start - x_one + (x_one//3) + 70) ,(y_start -y_one + 25)), font, fontsize,(0,0,255),fontthickness,cv2.LINE_AA)
 	cv2.imshow('Cal',img2)
 	if cv2.waitKey(23) == ord('q'):
 		break
