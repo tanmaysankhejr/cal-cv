@@ -2,7 +2,7 @@ priority = {
 	"+" : 1,
 	"-" : 1,
 	"/" : 2,
-	"*" : 2,
+	"X" : 2,
 	"^" : 3,
 	"(" : 0,
 	")" : 0,
@@ -17,7 +17,6 @@ def isFloat(number):
 		return False
 
 def infixToPost(inExpr):
-	print(list(inExpr.strip().split()))
 	global priority
 	postExpr, opStack = [], []
 	for token in list(inExpr.strip().split()):
@@ -57,7 +56,7 @@ def evaluate(postExpr):
 				temp = tempStack.pop(1) - tempStack.pop(0)
 			elif token == "+":
 				temp = tempStack.pop(1) + tempStack.pop(0)
-			elif token == "*":
+			elif token == "X":
 				temp = tempStack.pop(1) * tempStack.pop(0)
 			elif token == "/":
 				temp = tempStack.pop(1)/tempStack.pop(0)
@@ -66,15 +65,17 @@ def evaluate(postExpr):
 		# print(token)
 		# print(tempStack)
 
-	return( str("{0:.3f}".format(tempStack[0])))
+	if tempStack[0] - int(tempStack[0]) == 0 :
+		return tempStack[0]
+	return( str("{0:.2f}".format(tempStack[0])))
 
 
-expression = "( 6.2 + 6 / 3.1 ) * 2.8"
+# expression = "( 6.2 + 6 / 3.1 ) X 2.8"
 
 # postExpr = infixToPost(expression)
 # infixToPost("2 + 8 / 2") 
 # postExpr = ['2', '4', '5', '/', '5', '3', '-', '5', '^', '4', '^', '*', '+']
 # postExpr = ['2', '4', '5', '+', '5', '3', '-', '5', '4', '+']
 #postExpr = ["10", "12", "+"]
-
+# print(evaluate("6 X 8"))
 

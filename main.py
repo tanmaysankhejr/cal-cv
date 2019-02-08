@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import menu
 import airpen
+import calculate
 cap = cv2.VideoCapture(0)
 frame = cap.read()[1]
 dis = "0"
@@ -18,10 +19,10 @@ def framecount(cur):
 	buttons  =  { x:0 for x in buttons}
 	buttons[cur] = temp
 	buttons[cur] += 1
-	if buttons[cur] > 20:
+	if buttons[cur] > 25:
 		buttons[cur] = 0
 		if cur == "=":
-			return ""
+			return True
 		elif cur == "<":
 			return True
 		elif cur == "C":
@@ -110,18 +111,22 @@ while True:
 		elif(x_pt > x_start + 3*x_one and x_pt < x_start + 4*x_one):
 			dis += framecount(")")
 		elif(x_pt > x_start + 4*x_one and x_pt < x_start + 5*x_one):
-			if framecount("=") : pass
+			if framecount("=") :
+				dis = calculate.evaluate(dis)
 		else:
 			pass
 	else:
 		pass
 
+	dis2 = str("".join(dis.split()))
+	if len(dis2) > 1 and dis2[0] == "0":
+		dis2 = dis2[1:]
 	fontsize = 1.5
 	fontthickness = 4	
-	if(len(dis) > 10):
+	if(len(dis2) > 10):
 		fontsize = 0.8
 		fontthickness = 3
-	cv2.putText(img2,str("".join(dis.split())),( (x_start - x_one + (x_one//3) + 70) ,(y_start -y_one + 25)), font, fontsize,(0,0,255),fontthickness,cv2.LINE_AA)
+	cv2.putText(img2,dis2,( (x_start - x_one + (x_one//3) + 70) ,(y_start -y_one + 25)), font, fontsize,(0,0,255),fontthickness,cv2.LINE_AA)
 	cv2.imshow('Cal',img2)
 	if cv2.waitKey(23) == ord('q'):
 		break
