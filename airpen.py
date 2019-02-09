@@ -31,7 +31,7 @@ def pointer(img):
             x_pt = int(x)
             y_pt = int(y)
             cv2.circle(img, (int(x), int(y)), int(radius),(255,255,255), 2)
-            cv2.circle(img, center, 5, (226, 43, 138), -1)
+            cv2.circle(img, center, 5, (216, 100, 138), -1)
             lost_count += 1
             if lost_count > 20:
                 x_pt, y_pt = 1000, 1000

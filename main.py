@@ -117,7 +117,8 @@ while True:
 			pass
 	else:
 		pass
-
+	# print(dis)
+	dis = str(dis)
 	dis2 = str("".join(dis.split()))
 	if len(dis2) > 1 and dis2[0] == "0":
 		dis2 = dis2[1:]
