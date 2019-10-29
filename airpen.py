@@ -26,7 +26,7 @@ def pointer(img):
         ((x, y), radius) = cv2.minEnclosingCircle(c)
         M = cv2.moments(c)
         center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
-        if radius > 5:
+        if radius > 4:
             lost_count = 0
             x_pt = int(x)
             y_pt = int(y)
